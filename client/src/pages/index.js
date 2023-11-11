@@ -13,9 +13,6 @@ function Home() {
 		axios.post(serverAddress + "getUsers").then((res) => {
 			console.log(res);
 			setListOfUsers(res.data);
-		})
-	}, [])
-
 		}).catch((err) =>
 		console.log(err.stack)
 	)}, []
