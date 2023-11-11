@@ -2,18 +2,24 @@ import React from "react";
 import Navbar from '../components/Navbar';
 import { useState, useEffect } from "react";
 import axios from "axios";
-// const { serverAddress } = require('./config.json');
+const { serverAddress } = require('./config.json');
 
 function Home() {
 	const [listOfUsers, setListOfUsers] = useState([])
 
 	useEffect(() => {
-		axios.get("http://www.gigabites.org:3001/getUsers").then((res) => {
+		console.log('Attempting to run useEffect')
+		
+		axios.post(serverAddress + "getUsers").then((res) => {
 			console.log(res);
 			setListOfUsers(res.data);
 		})
 	}, [])
 
+		}).catch((err) =>
+		console.log(err.stack)
+	)}, []
+	)
 	return (
 		<div className='centereddiv'>
 
