@@ -2,7 +2,12 @@ import React from "react";
 import Navbar from '../components/Navbar';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ReactSession } from 'react-client-session';
 const { serverAddress } = require('./config.json');
+
+
+ReactSession.set("username", 'bklein');
+
 
 function Home() {
 	const [listOfUsers, setListOfUsers] = useState([])
@@ -17,6 +22,7 @@ function Home() {
 		console.log(err.stack)
 	)}, []
 	)
+
 	return (
 		<div className='centereddiv'>
 
@@ -31,9 +37,9 @@ function Home() {
 				{listOfUsers.map((user) => {
 					return (
 						<div>
-							<h1>Name: {user.name}</h1>
+							{/* <h1>Name: {user.name}</h1>
 							<h1>Username: {user.username}</h1>
-							<h1>Email: {user.email}</h1>
+							<h1>Email: {user.email}</h1> */}
 						</div>
 					)
 				})}

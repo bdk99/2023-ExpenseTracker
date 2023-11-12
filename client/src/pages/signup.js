@@ -131,7 +131,7 @@ class SignUp extends React.Component{
     console.log(this.state.answer);
 
 
-    if(this.state.name ==='' || this.state.username === '' || this.state.email === '' || this.state.password === '' || this.state.question === '' || this.state.answer === '') {
+    if(this.state.name ==='' || this.state.username === '' || this.state.email === '' || this.state.password === '') {
       alert("Missing some information! Please try again.");
       return;
     }
@@ -142,9 +142,7 @@ class SignUp extends React.Component{
         name: this.state.name,
         username: this.state.username,
         email: this.state.email,
-        password: this.state.password,
-        question: this.state.question,
-        answer: this.state.answer
+        password: this.state.password
       }).then((res) => {
         if(res.data === true) {
           console.log('Signup successful!');
@@ -221,27 +219,6 @@ class SignUp extends React.Component{
                       </td>
                     </tr>
                   </tbody>
-    
-                  <tbody>
-                    <tr>
-                      <td>
-                        {/*Security Question*/}
-                        <label className="label">Security Question</label>
-                        <input className="textbox" type="text" id='question' value={this.state.question} onChange={this.handleQuestionChange} required/>
-                      </td>
-                    </tr>
-                  </tbody>
-    
-                  <tbody>
-                    <tr>
-                      <td>
-                        {/*Security Question Answer */}
-                        <label className="label">Security Question Answer</label>
-                        <input className="textbox" type="text" id='answer' value={this.state.answer} onChange={this.handleAnswerChange} required/>
-                      </td>
-                    </tr>
-                  </tbody>
-    
                 </table>
     
                 <button className="btn"> Submit </button>

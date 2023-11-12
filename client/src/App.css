@@ -330,3 +330,11 @@ color: white;
 }
 
 /* ----------------> End of login page related material <---------------- */
+
+
+
+.centeredExpenses{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}

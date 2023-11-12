@@ -18,7 +18,7 @@ function toggle() {
 function getUserInfo()
 {
   //Compares password to the hashed one in the database
-  axios.post(serverAddress+"getUsers", {
+  axios.post(serverAddress+"loginUser", {
     username: ReactSession.get('username'),
   }).then((res) => {
     if(res.data === false)
@@ -26,8 +26,6 @@ function getUserInfo()
     else{
       ReactSession.set("bio", res.data.bio);
       ReactSession.set("email", res.data.email);
-      ReactSession.set("question", res.data.question);
-      ReactSession.set("answer", res.data.answer);
       ReactSession.set("profilePicture", res.data.profilePicture+"."+res.data.profilePictureEXT);
     }
   }).catch(() => {
@@ -82,10 +80,9 @@ class Login extends React.Component {
     //Alerts user of successful login, and redirects to user profile
     if(this.state.redirect){
       /*Updates profile page URL based on users username*/
-      let finalURL = '../profile/'+ReactSession.get('username');
       return(
         <div>
-          <Navigate to={finalURL} />
+          <Navigate to='/' />
         </div>
       );
     }
