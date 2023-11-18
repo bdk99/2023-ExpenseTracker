@@ -5,9 +5,7 @@ import axios from "axios";
 import { ReactSession } from 'react-client-session';
 const { serverAddress } = require('./config.json');
 
-
 ReactSession.set("username", 'bklein');
-
 
 function Home() {
 	const [listOfUsers, setListOfUsers] = useState([])

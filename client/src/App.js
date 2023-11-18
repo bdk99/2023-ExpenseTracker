@@ -12,6 +12,7 @@ import AboutUs from './pages/About-Us';
 import Incomes from './pages/incomes';
 import Expenses from './pages/expenses';
 import AddExpenses from './pages/addExpense';
+import Budget from './pages/budget';
 
 //Sets storage type for session variables
 ReactSession.setStoreType('localStorage');
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path='/expenses/:username' component={User} element={<Expenses/>} />
           <Route path='/incomes/:username' component={User} element={<Incomes/>} />
           <Route path='/addExpense' element={<AddExpenses/>} />
+          <Route path='/budget' element={<Budget/>} />
         </Routes>
       </Router>
     );
