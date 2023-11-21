@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
 const ExpenseModel = require('./models/Expenses');
+const BudgetModel = require('./models/Budget');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const router = express.Router();
@@ -211,8 +212,25 @@ app.post("/getExpenses", (req, res) => {
       }
       else
       {
-        console.log(expenses);
         res.send(expenses);
+      }
+  });
+});
+
+
+
+{/*Gets budget from MongoDB database based on the logged in users username*/}
+app.post("/getBudget", (req, res) => {
+  const output = req.body;
+
+    BudgetModel.find({ username: output.username }, function (err, budgets) {
+      if (err || budgets == null) 
+      {
+        console.log('Error in backend in getBudget function')
+      }
+      else
+      {
+        res.send(budgets);
       }
   });
 });

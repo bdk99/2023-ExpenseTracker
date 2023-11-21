@@ -38,7 +38,7 @@ class App extends Component {
           <Route path='/expenses/:username' component={User} element={<Expenses/>} />
           <Route path='/incomes/:username' component={User} element={<Incomes/>} />
           <Route path='/addExpense' element={<AddExpenses/>} />
-          <Route path='/budget' element={<Budget/>} />
+          <Route path='/budget/:username' component={User} element={<Budget/>} />
         </Routes>
       </Router>
     );

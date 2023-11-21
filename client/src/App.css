@@ -155,6 +155,13 @@ font-size: larger;
 font-weight: bold;
 }
 
+.newheader{
+  padding: 20px;
+text-align: center;
+color: #ff8552;
+font-size: larger;
+font-weight: bold;
+}
 
 /* ----------------> Start of Navbar related material <---------------- */
 
@@ -337,4 +344,22 @@ color: white;
   margin-left:auto;
   margin-right:auto;
   text-align:center;
+}
+
+.budgetTable{
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-left:auto;
+  margin-right:auto;
+  border: 1px solid black;
+}
+
+.budgetTableEnd{
+  border: 1px solid black;
+  background-color: black;
+  color: black;
+}
+
+.contentBody{
+  color:#ff8552;
 }
