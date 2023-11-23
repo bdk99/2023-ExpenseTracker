@@ -344,6 +344,7 @@ color: white;
   margin-left:auto;
   margin-right:auto;
   text-align:center;
+  color:#ff8552;
 }
 
 .budgetTable{
@@ -362,4 +363,12 @@ color: white;
 
 .contentBody{
   color:#ff8552;
+}
+
+.expensesTable{
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-left:auto;
+  margin-right:auto;
+  border: 1px solid black;
 }

@@ -1,11 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-
-// eslint-disable-next-line
 import { ReactSession } from 'react-client-session';
-
-//const fs = require('js');
-//const csv = require('fast-csv');
 
 const Incomes = () => { 
 

@@ -29,22 +29,28 @@ function Expenses(){
 
             <div className ="header">
 				   <h1>Expenses</h1>
-
-               <table className='centeredExpenses'>
-                     <tr>
-                        <th>Date</th>
-                        <th>Amount</th>
-                     </tr>
-                  {listOfExpenses.map((expense) => {
-                     return (
-                        <tr>
-                           <td>{expense.date.substring(0,10)}</td>
-                           <td>{expense.amount}</td>
-                        </tr>
-                     )
-                     })}
-               </table>
             </div>
+
+            <table className='centeredExpenses'>
+                  <tr>
+                     <th className="expensesTable">Date</th>
+                     <th className="expensesTable">Amount</th>
+                     <th className="expensesTable">Description</th>
+                     <th className="expensesTable">Category</th>
+                     <th className="expensesTable">Account</th>
+                  </tr>
+               {listOfExpenses.map((expense) => {
+                  return (
+                     <tr>
+                        <td className='expensesTable'>{expense.date.substring(0,10)}</td>
+                        <td className='expensesTable'>{expense.amount}</td>
+                        <td className='expensesTable'>{expense.description}</td>
+                        <td className='expensesTable'>{expense.category}</td>
+                        <td className='expensesTable'>{expense.account}</td>
+                     </tr>
+                  )
+                  })}
+            </table>
 		</div>
 	);
 };

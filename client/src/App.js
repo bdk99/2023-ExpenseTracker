@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
 
+//Imports pages to allow BrowserRouter to access them
 import Home from './pages';
 import SignUp from './pages/signup';
 import Login from './pages/login';
@@ -12,6 +13,7 @@ import AboutUs from './pages/About-Us';
 import Incomes from './pages/incomes';
 import Expenses from './pages/expenses';
 import AddExpenses from './pages/addExpense';
+import AddExpensesCSV from './pages/uploadCSV';
 import Budget from './pages/budget';
 
 //Sets storage type for session variables
@@ -39,6 +41,7 @@ class App extends Component {
           <Route path='/incomes/:username' component={User} element={<Incomes/>} />
           <Route path='/addExpense' element={<AddExpenses/>} />
           <Route path='/budget/:username' component={User} element={<Budget/>} />
+          <Route path='/addExpensesCSV' element={<AddExpensesCSV/>} />
         </Routes>
       </Router>
     );

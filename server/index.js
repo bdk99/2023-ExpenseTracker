@@ -4,11 +4,14 @@ const mongoose = require('mongoose');
 const UserModel = require('./models/Users');
 const ExpenseModel = require('./models/Expenses');
 const BudgetModel = require('./models/Budget');
+const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const bodyParser = require("body-parser");
 const { port, db, clientAddress } = require('./config.json');
+const fs = require('fs');
+const csv = require('fast-csv');
 
 app.use("/",router);
 app.use(express.json());
@@ -16,10 +19,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// default options for file upload using express-fileupload
+app.use(fileUpload());
 
 {/*Sets up connection to MongoDB database using mongoose library*/}
 mongoose.connect(`${db}`);
-
 
 
 {/*Function to getUsers from database for home page list*/}
@@ -204,6 +208,7 @@ app.post("/addExpenseToBackend", async (req, res) => {
 {/*Gets expenses from MongoDB database based on the logged in users username*/}
 app.post("/getExpenses", (req, res) => {
   const output = req.body;
+  var mysort = { date: -1 };
 
     ExpenseModel.find({ username: output.username }, function (err, expenses) {
       if (err || expenses == null) 
@@ -214,7 +219,7 @@ app.post("/getExpenses", (req, res) => {
       {
         res.send(expenses);
       }
-  });
+  }).sort(mysort);
 });
 
 
@@ -234,6 +239,78 @@ app.post("/getBudget", (req, res) => {
       }
   });
 });
+
+
+
+var transactionDate = '';
+var postDate = '';
+var amount = '';
+var category = '';
+var account = '';
+var addNewExpense = {};
+var entryDate;
+
+{/*Takes the add Expense CSV data from client, and adds it to mongoDB using Expense model*/}
+app.post("/backendExpensesCSV", async function(req, res){
+  console.log(req.body);
+
+  //Gets file name and type of uploaded file from front-end and saves it on server temporarily for later parsing
+  let sampleFile;
+  let uploadPath;
+
+  sampleFile = req.files.sampleFile;
+
+  let arr = sampleFile.name.split(".");
+  let ext = arr.pop();
+  sampleFile.name = "test."+ext;
+
+  uploadPath = '../client/public/' + sampleFile.name;
+
+
+  // Moves file to backend server
+  sampleFile.mv(uploadPath, function(err) {
+    if (err)
+      return res.status(500).send(err);
+      console.log('File '+sampleFile.name+' uploaded!');
+  });
+
+
+  // // options which needed for the fast-csv
+  const options = { headers: true, trim: true, delimiter: "," } 
+
+  // Reads CSV file from stream, and adds documents to DB one row at a time
+  fs.createReadStream(uploadPath)
+  .pipe(csv.parse(options))
+  .on('error', error => console.log(error))
+  .on('data', (row) => {
+
+    transactionDate = `${row["Trans. Date"]}`;
+    postDate = `${row["Post Date"]}`;
+    description = `${row["Description"]}`;
+    amount = `${row["Amount"]}`;
+    category = `${row["Category"]}`;
+    account = `${row["Account"]}`;
+
+    addNewExpense = {
+      username: req.body.username,
+      amount: amount,
+      description: description,
+      category: category,
+      reciept: 'N',
+      account: account,
+      date: transactionDate,
+    };
+
+    ExpenseModel.create(addNewExpense).then(
+    ).catch(function (error) {
+      console.log(error);
+    })
+
+  })
+  .on('end', (rowCount) => console.log(`Parsed ${rowCount} rows`))
+
+});
+
 
 
 
