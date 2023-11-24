@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 
 function GithubURL(path)
 {
-	window.location.href = path;	  
+	window.location.href = path;
 }
 
 const AboutUs = () => {

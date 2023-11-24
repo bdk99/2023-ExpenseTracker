@@ -1,0 +1,6 @@
+server/node_modules/*
+client/node_modules/*
+client/src/pages/config.json
+server/config.json
+*.csv
+*.CSV
